@@ -357,7 +357,7 @@ function sendEmail(billingDetails, cartData, totalAmount) {
 
     try {
         emailjs
-            .send("service_xv2kvlp", "template_eo5yg5e", templateParams)
+            .send("service_nzbfq1h", "template_5089gbn", templateParams)
             .then((response) => {
                 alert("Order placed successfully!");
                 console.log("Email sent successfully:", response.status, response.text);
