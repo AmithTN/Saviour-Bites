@@ -136,11 +136,7 @@ cartItemHTML += `
 if (cartData.length > 0) {
     cartItemHTML += `
         <div class="cart-footer">
-                <div id="cart-total-container" style="display: flex; align-items: center; justify-content: space-between; width: 100%; margin-top: 20px; margin-bottom: 20px;">
-                    <h4 style="margin: 0; font-size: 18px; font-weight: bold;">Total </h4>
-                    <div style="flex-grow: 1;"></div> <!-- Middle gap -->
-                    <h4 style="margin: 0; font-size: 28px; font-weight: bold;">₹${total}</h4>
-                </div>
+            <h2><strong>Total: ₹${total}</strong></h2>
             <button type="button" class="elementor-button" onclick="window.location.href='checkout';" style="margin-top: 10px;">
                 Checkout
             </button>
