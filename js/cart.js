@@ -339,11 +339,31 @@ function checkout() {
     console.log("Cart Data:", cartData);
     console.log("Billing Details:", billingDetails);
     console.log("Total Amount:", totalAmount);
+
+        initiatePayment()
     
+
+}
+
+
+// Function to initiate payment via PhonePe
+function initiatePayment() {
+    const totalAmount = localStorage.getItem('cartTotal');
+    const userName = encodeURIComponent(document.getElementById('form-field-fullname').value);
     
-    alert("Please wait! Your order is being processed.");
-    
-    sendEmail(billingDetails, cartData, totalAmount);
+    // Construct UPI payment link for PhonePe
+    const upiLink = `upi://pay?pa=PGTESTPAYUAT@upi&pn=${userName}&am=${totalAmount}&cu=INR`;
+    // Redirect the user to the UPI payment link
+    window.location.href = upiLink;
+
+    // Listen for payment completion (optional)
+    window.addEventListener('blur', function() {
+
+        // This can be a check for the transaction status via backend
+         alert("Please wait! Your order is being processed.");
+        
+        sendEmail(billingDetails, cartData, totalAmount); // Send confirmation email
+    });
 }
 
 //Function to send email
