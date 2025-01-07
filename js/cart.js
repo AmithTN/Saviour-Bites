@@ -408,7 +408,7 @@ function clearCart() {
     if (cartContainer) cartContainer.innerHTML = "";
     if (cartTotal) cartTotal.textContent = "0";
 
-    alert("Thank you for your purchase!");
+   
 }
 
 // Attach checkout function to Place Order button
