@@ -359,7 +359,7 @@ function sendEmail(billingDetails, cartData, totalAmount) {
         emailjs
             .send("service_nzbfq1h", "template_5089gbn", templateParams)
             .then((response) => {
-                alert("Order placed successfully!");
+                alert("Order placed successfully.\nThank you for your purchase!");
                 console.log("Email sent successfully:", response.status, response.text);
 
                 clearCart();
