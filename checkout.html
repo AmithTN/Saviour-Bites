@@ -555,9 +555,7 @@
                                     <input type="hidden" name="queried_id" value="46"/>
                                     <div class="elementor-form-fields-wrapper elementor-labels-above">
 
-                                        <div id="cart-total-container">
-                                            <h4><b>Total Amount : ₹<span id="cart-total"></span> </b></h4>
-                                        </div>
+                                       
 
                                         <div class="elementor-field-group elementor-field-required">
                                             <label for="form-field-fullname" class="elementor-field-label">Full name <span style="color: red"> *</span></label>
@@ -622,23 +620,24 @@
                                             </label>
                                         </div>
                                         
-                                
-                                        <div class="elementor-field-group">
-                                            <label for="payment_method_phonepe" class="elementor-field-label"> Payment Solutions </label>
+                                        <div id="cart-total-container" style="display: flex; align-items: center; justify-content: space-between; width: 100%; margin-top: 20px; margin-bottom: 20px;">
+                                            <h4 style="margin: 0; font-size: 18px; font-weight: bold;">Total </h4>
+                                            <div style="flex-grow: 1;"></div> <!-- Middle gap -->
+                                            <h4 style="margin: 0; font-size: 32px; font-weight: bold; color: #409843;">₹<span id="cart-total">0</span></h4>
+                                        </div>
+                                       
+                     
+                                        <button type="submit" id="place_order" class="button alt  elementor-button-submit" name="checkout_place_order"  value="Place order" data-value="Place order">Place order</button>
+
+                                         <div class="elementor-field-group">
                                             <div class="payment-methods-container">
                                                 <img class="payment_methods" src="Images/gpay.jpg" alt="Gpay Payment Solutions">	
                                                 <img class="payment_methods" src="Images/phonepe.jpg" alt="PhonePe Payment Solutions">	
                                                 <img class="payment_methods" src="Images/paytm.jpg" alt="Paytm Payment Solutions">	
                                                 <img class="payment_methods" src="Images/amazon-pay.jpg" alt="Amazon-pay Payment Solutions">	
 
-                                            </div>
-                                            <div class="payment_box payment_method_phonepe" style="display: block;">
-                                                <p>All UPI payments are accepted </p>
-                                            </div>
+                                            </div>                                          
                                         </div>           
-                     
-                                        <button type="submit" id="place_order" class="button alt  elementor-button-submit" name="checkout_place_order"  value="Place order" data-value="Place order">Place order</button>
-                                        
                                   
                                     </div>
                                 </form>                
