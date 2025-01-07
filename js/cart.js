@@ -125,6 +125,12 @@ if (cartData.length === 0) {
     });
 }
 
+
+    // Add hidden charges
+    const hiddenCharges = 10;
+    total += hiddenCharges;
+
+
 // Close the table structure
 cartItemHTML += `
             </tbody>
