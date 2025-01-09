@@ -335,8 +335,7 @@ function checkout() {
     console.log("Total Amount:", totalAmount);
     
     
-   
-    initiatePayment()
+
 
     
      sendEmail(billingDetails, cartData, totalAmount);
