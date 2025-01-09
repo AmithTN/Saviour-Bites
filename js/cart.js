@@ -363,7 +363,8 @@ function initiatePayment() {
         const transactionNote = "Payment for Saviour Bites Order"; // Replace with a relevant note
         const currency = "INR";
 
-        const upiLink = `upi://pay?pa=${upiId}&pn=${payeeName}&tid=${transactionId}&tr=${referenceId}&tn=${transactionNote}&am=${totalAmount}&cu=${currency}`;
+      
+        const upiLink = `upi://pay?pa=${upiId}&pn=${payeeName}&tid=${transactionId}&tr=${referenceId}&tn=${transactionNote}&cu=${currency}`;
     
         window.location.href = upiLink;  
 
