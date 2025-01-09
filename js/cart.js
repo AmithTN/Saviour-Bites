@@ -356,7 +356,7 @@ function initiatePayment() {
 /*    const upiLink = `upi://pay?pa=amithalex5251@oksbi&pn=Saviour Bites&am=${totalAmount}&cu=INR`;
     window.location.href = upiLink;    */
 
-        const upiId = "amithalex5251@oksbi"; // Replace with your UPI ID
+        const upiId = "6360516925@ybl"; // Replace with your UPI ID
         const payeeName = "SaviourBites"; // Replace with your business name
         const transactionId = "TXN" + new Date().getTime(); // Unique transaction ID
         const referenceId = "REF" + new Date().getTime(); // Unique reference ID
