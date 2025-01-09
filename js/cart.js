@@ -306,38 +306,146 @@ function checkout() {
     if (!validateForm()) return;
 
     const cartData = JSON.parse(localStorage.getItem('cartData')) || [];
+    const totalAmount = localStorage.getItem('cartTotal') || 0;
 
     if (!cartData.length) {
         alert("Your cart is empty! Please add items before checking out.");
         return;
     }
 
+    const billingDetails = {
+        name: document.getElementById('form-field-fullname').value,
+        phone: document.getElementById('form-field-PhoneNo').value,
+        address: document.getElementById('form-field-address').value,
+        veggies: document.getElementById('form-field-veggies').value,
+        sprouts: document.getElementById('form-field-sprouts').value,
+        gym: document.getElementById('form-field-gym').value,
+        message: document.getElementById('form-field-message').value,
+    };
+    
+    // Disable the checkout button
+    const checkoutButton = document.getElementById('place_order');
+    if (checkoutButton) {
+        checkoutButton.disabled = true;
+        checkoutButton.textContent = "Processing...";
+    }
 
-const orderId = "ORDER" + Date.now(); // Generate a unique order ID
-const amount = localStorage.getItem("cartTotal") || 0; // Get the total amount
-
-// Ensure the cart has items and total amount is valid
-if (parseInt(amount) === 0) {
-    alert("Your cart is empty. Please add items to proceed.");
-    return;
+    console.log("Cart Data:", cartData);
+    console.log("Billing Details:", billingDetails);
+    console.log("Total Amount:", totalAmount);
+    
+    
+    initiatePayment();
 }
 
-// Send order details to initiateTransaction.php
-fetch("initiateTransaction.php", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: `orderId=${orderId}&amount=${amount}`,
-})
-    .then((response) => response.json())
-    .then((data) => {
-        if (data.success) {
-            // Redirect to PhonePe payment page
-            window.location.href = data.instrumentResponse.redirectUrl;
-        } else {
-            alert("Payment initiation failed. Try again.");
+
+// Function to initiate payment 
+function initiatePayment() {
+    const totalAmount = localStorage.getItem('cartTotal') || 0;
+
+    if (totalAmount <= 0) {
+        alert("Your cart is empty! Please add items before placing the order.");
+        return;
+    }
+    
+/*    const upiLink = `upi://pay?pa=amithalex5251@oksbi&pn=Saviour Bites&am=${totalAmount}&cu=INR`;
+    window.location.href = upiLink;    */
+
+
+        const upiId = amithalex5251@oksbi"; // Replace with your UPI ID
+        const payeeName = "SaviourBites"; // Replace with your business name
+        const transactionId = "TXN" + new Date().getTime(); // Unique transaction ID
+        const referenceId = "REF" + new Date().getTime(); // Unique reference ID
+        const transactionNote = "Payment for Saviour Bites Order"; // Replace with a relevant note
+        const currency = "INR";
+
+        const upiLink = `upi://pay?pa=${upiId}&pn=${payeeName}&tid=${transactionId}&tr=${referenceId}&tn=${transactionNote}&am=${totalAmount}&cu=${currency}`;
+    
+        window.location.href = upiLink; 
+
+
+    
+
+        // Add a fallback if the UPI app does not process the payment
+        setTimeout(() => {
+            alert("If the UPI payment fails, you can try scanning our QR code or use an alternative payment method.");
+        }, 3000);
+
+
+    // Send confirmation email after checkout
+    sendEmail(billingDetails, cartData, totalAmount);
+}
+
+//Function to send email
+
+function sendEmail(billingDetails, cartData, totalAmount) {
+    const templateParams = {
+        user_name: billingDetails.name,
+        user_phone: billingDetails.phone,
+        user_address: billingDetails.address,
+        user_veggies: billingDetails.veggies,
+        user_sprouts: billingDetails.sprouts,
+        user_gym: billingDetails.gym,
+        user_message: billingDetails.message,
+        cart_data: JSON.stringify(cartData, null, 2),
+        total_amount: totalAmount,
+    };
+
+    try {
+        emailjs
+            .send("service_xv2kvlp", "template_eo5yg5e", templateParams)
+            .then((response) => {
+                alert("Order placed successfully!");
+
+                console.log("Email sent successfully:", response.status, response.text);
+
+                clearCart();
+                
+                // Re-enable the checkout button
+                const checkoutButton = document.getElementById('place_order');
+                if (checkoutButton) {
+                    checkoutButton.disabled = false;
+                    checkoutButton.textContent = "Place Order";
+                }
+                
+            })
+            .catch((error) => {
+                console.error("Failed to send email:", error);
+                alert("We encountered an issue while processing your order. Please try again.");
+                
+                // Re-enable the checkout button
+                const checkoutButton = document.getElementById('place_order');
+                if (checkoutButton) {
+                    checkoutButton.disabled = false;
+                    checkoutButton.textContent = "Place Order";
+                }
+            });
+    } 
+    catch (error) {
+        console.error("Unexpected error:", error);
+        alert("An unexpected error occurred. Please try again later.");
+        
+        // Re-enable the checkout button
+        const checkoutButton = document.getElementById('place_order');
+        if (checkoutButton) {
+            checkoutButton.disabled = false;
+            checkoutButton.textContent = "Place Order";
         }
-    })
-    .catch((error) => console.error("Error:", error));
+    }
+}
+
+// function to clear the local storage
+
+function clearCart() {
+    localStorage.removeItem("cartData");
+    localStorage.removeItem("cartTotal");
+    const cartContainer = document.getElementById("cart-container");
+    const cartTotal = document.getElementById("cart-total");
+
+    if (cartContainer) cartContainer.innerHTML = "";
+    if (cartTotal) cartTotal.textContent = "0";
+    
+    alert("Thank you for your purchase!\n\n Please complete your payment using the provided phone number via UPI apps.");
 }
 
 // Attach checkout function to Place Order button
