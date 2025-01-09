@@ -335,11 +335,9 @@ function checkout() {
     console.log("Total Amount:", totalAmount);
     
     
-   
-     // Send confirmation email after checkout
+    alert("Please wait! Your order is being processed.");
+    
     sendEmail(billingDetails, cartData, totalAmount);
-    
-    
 }
 
 //Function to send email
