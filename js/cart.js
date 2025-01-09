@@ -335,10 +335,39 @@ function checkout() {
     console.log("Total Amount:", totalAmount);
     
     
-    alert("Please wait! Your order is being processed.");
+    initiatePayment();
     
+    
+}
+
+
+// Function to initiate payment 
+function initiatePayment() {
+    const totalAmount = localStorage.getItem('cartTotal') || 0;
+
+    if (totalAmount <= 0) {
+        alert("Your cart is empty! Please add items before placing the order.");
+        return;
+    }
+    
+/*    const upiLink = `upi://pay?pa=amithalex5251@oksbi&pn=Saviour Bites&am=${totalAmount}&cu=INR`;
+    window.location.href = upiLink;    */
+
+        const upiId = amithalex5251@oksbi"; // Replace with your UPI ID
+        const payeeName = "SaviourBites"; // Replace with your business name
+        const transactionId = "TXN" + new Date().getTime(); // Unique transaction ID
+        const referenceId = "REF" + new Date().getTime(); // Unique reference ID
+        const transactionNote = "Payment for Saviour Bites Order"; // Replace with a relevant note
+        const currency = "INR";
+
+        const upiLink = `upi://pay?pa=${upiId}&pn=${payeeName}&tid=${transactionId}&tr=${referenceId}&tn=${transactionNote}&am=${totalAmount}&cu=${currency}`;
+    
+        window.location.href = upiLink; 
+
+    // Send confirmation email after checkout
     sendEmail(billingDetails, cartData, totalAmount);
 }
+
 
 //Function to send email
 
