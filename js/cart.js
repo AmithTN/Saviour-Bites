@@ -335,11 +335,11 @@ function checkout() {
     console.log("Total Amount:", totalAmount);
     
     
-    toggleCart();
+
     
     initiatePayment();
     
-     sendEmail(billingDetails, cartData, totalAmount);
+//     sendEmail(billingDetails, cartData, totalAmount);
  
 }
 
