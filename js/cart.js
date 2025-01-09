@@ -335,44 +335,8 @@ function checkout() {
     console.log("Total Amount:", totalAmount);
     
     
-    initiatePayment();
-}
-
-
-// Function to initiate payment 
-function initiatePayment() {
-    const totalAmount = localStorage.getItem('cartTotal') || 0;
-
-    if (totalAmount <= 0) {
-        alert("Your cart is empty! Please add items before placing the order.");
-        return;
-    }
+    alert("Please wait! Your order is being processed.");
     
-/*    const upiLink = `upi://pay?pa=amithalex5251@oksbi&pn=Saviour Bites&am=${totalAmount}&cu=INR`;
-    window.location.href = upiLink;    */
-
-
-        const upiId = amithalex5251@oksbi"; // Replace with your UPI ID
-        const payeeName = "SaviourBites"; // Replace with your business name
-        const transactionId = "TXN" + new Date().getTime(); // Unique transaction ID
-        const referenceId = "REF" + new Date().getTime(); // Unique reference ID
-        const transactionNote = "Payment for Saviour Bites Order"; // Replace with a relevant note
-        const currency = "INR";
-
-        const upiLink = `upi://pay?pa=${upiId}&pn=${payeeName}&tid=${transactionId}&tr=${referenceId}&tn=${transactionNote}&am=${totalAmount}&cu=${currency}`;
-    
-        window.location.href = upiLink; 
-
-
-    
-
-        // Add a fallback if the UPI app does not process the payment
-        setTimeout(() => {
-            alert("If the UPI payment fails, you can try scanning our QR code or use an alternative payment method.");
-        }, 3000);
-
-
-    // Send confirmation email after checkout
     sendEmail(billingDetails, cartData, totalAmount);
 }
 
@@ -444,8 +408,8 @@ function clearCart() {
 
     if (cartContainer) cartContainer.innerHTML = "";
     if (cartTotal) cartTotal.textContent = "0";
-    
-    alert("Thank you for your purchase!\n\n Please complete your payment using the provided phone number via UPI apps.");
+
+    alert("Thank you for your purchase!");
 }
 
 // Attach checkout function to Place Order button
