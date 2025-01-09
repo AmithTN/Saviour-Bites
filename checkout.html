@@ -198,7 +198,7 @@
                                                 <li><a href="curatedmeals">Curated Meals</a></li>
                                                 <li><a href="chicken">Chicken Delights</a></li>
                 <!--                                <li><a href="heartybites">Hearty Bites</a></li>           -->
-                                                <li><a href="dryfruits">Nutritious Dry Fruits</a></li>
+                                                <li><a href="dryfruits">Dry Fruits</a></li>
                                                 <li><a href="fruits">Fresh Fruits</a></li>
                                                 <li><a href="veggies">Veggies</a></li>
                                                 <li><a href="sprouts">Power Proteins & Sprouts</a></li>
@@ -233,7 +233,7 @@
                                                 <li><a href="curatedmeals">Curated Meals</a></li>
                                                 <li><a href="chicken">Chicken Delights</a></li>
                 <!--                                <li><a href="heartybites">Hearty Bites</a></li>           -->
-                                                <li><a href="dryfruits">Nutritious Dry Fruits</a></li>
+                                                <li><a href="dryfruits">Dry Fruits</a></li>
                                                 <li><a href="fruits">Fresh Fruits</a></li>
                                                 <li><a href="veggies">Veggies</a></li>
                                                 <li><a href="sprouts">Paneer and Sprouts</a></li>
@@ -332,7 +332,7 @@
                                             <li><a href="curatedmeals">Curated Meals</a></li>
                                             <li><a href="chicken">Chicken Delights</a></li>
                 <!--                                <li><a href="heartybites">Hearty Bites</a></li>           -->
-                                            <li><a href="dryfruits">Nutritious Dry Fruits</a></li>
+                                            <li><a href="dryfruits">Dry Fruits</a></li>
                                             <li><a href="fruits">Fresh Fruits</a></li>
                                             <li><a href="veggies">Veggies</a></li>
                                             <li><a href="sprouts">Paneer and Sprouts</a></li>
@@ -370,7 +370,7 @@
                                             <li><a href="curatedmeals">Curated Meals</a></li>
                                             <li><a href="chicken">Chicken Delights</a></li>
                 <!--                                <li><a href="heartybites">Hearty Bites</a></li>           -->
-                                            <li ><a href="dryfruits">Nutritious Dry Fruits</a></li>
+                                            <li ><a href="dryfruits">Dry Fruits</a></li>
                                             <li><a href="fruits">Fresh Fruits</a></li>
                                             <li><a href="veggies">Veggies</a></li>
                                             <li><a href="sprouts">Paneer and Sprouts</a></li>
@@ -577,8 +577,8 @@
                                         <div class="elementor-field-group elementor-field-required">
                                             <label for="form-field-veggies" class="elementor-field-label">Veggies Preference<span style="color: red;">*</span></label>
                                             <select name="form_fields[veggies]" id="form-field-veggies" class="elementor-field elementor-size-md" required="required" aria-required="true">
-                                                <option value="" disabled selected>Select an option</option>
-                                                <option value="raw">Raw</option>
+                                                <option value="" disabled selected>Select an option</option>  
+                                                <option value="raw" >Raw</option>
                                                 <option value="steamed">Steamed</option>
                                                 <option value="boiled">Boiled</option>
                                                 <option value="none">None</option>
@@ -588,13 +588,14 @@
                                         <div class="elementor-field-group elementor-field-required">
                                             <label for="form-field-sprouts" class="elementor-field-label">Sprouts Preference<span style="color: red;">*</span></label>
                                             <select name="form_fields[sprouts]" id="form-field-sprouts" class="elementor-field elementor-size-md" required="required" aria-required="true">
-                                                <option value="" disabled selected>Select an option</option>
-                                                <option value="raw">Raw</option>
+                                                <option value="" disabled selected>Select an option</option>  
+                                                <option value="raw" >Raw</option>
                                                 <option value="steamed">Steamed</option>
                                                 <option value="boiled">Boiled</option>
                                                 <option value="none">None</option>
                                             </select>
                                         </div>
+
 
                                         <div class="elementor-field-group elementor-field-required">
                                             <label for="form-field-gym" class="elementor-field-label">Gym Preference<span style="color: red;">*</span></label>
@@ -620,22 +621,35 @@
                                             </label>
                                         </div>
                                         
+                                        <div class="elementor-field-group elementor-field-required">
+                                            <label for="form-field-payment-phone" class="elementor-field-label" style="color: #409843;"><b>Payment Contact Number</b></label>
+                                            <input type="text" name="form_fields[payment_phone]" id="form-field-payment-phone" style="font-weight: bold; "  class="elementor-field elementor-size-md elementor-field-textual" value="73385434614" readonly="readonly" aria-required="true">
+                                        </div>
+                                        
+                                        <div class="elementor-field-group elementor-field-required">
+                                            <label for="form-field-recipient-name" class="elementor-field-label" style="color: #409843; "><b>Recipient Name</b></label>
+                                            <input type="text" name="form_fields[recipient_name]" id="form-field-recipient-name" style="font-weight: bold;" class="elementor-field elementor-size-md elementor-field-textual" value="Amith" readonly="readonly" aria-required="true">
+                                        </div>      
+                                        
+                                        <p >
+                                            All UPI payments are accepted.                                           
+                                        </p>
+                                        
                                         <div id="cart-total-container" style="display: flex; align-items: center; justify-content: space-between; width: 100%; margin-top: 20px; margin-bottom: 20px;">
                                             <h4 style="margin: 0; font-size: 18px; font-weight: bold;">Total </h4>
                                             <div style="flex-grow: 1;"></div> <!-- Middle gap -->
-                                            <h4 style="margin: 0; font-size: 24px; font-weight: bold;">₹<span id="cart-total">0</span></h4>
+                                            <h4 style="margin: 0; font-size: 28px; font-weight: bold;">₹<span id="cart-total">0</span></h4>
                                         </div>
-                     
+                                        
                                         <button type="submit" id="place_order" class="button alt  elementor-button-submit" name="checkout_place_order"  value="Place order" data-value="Place order">Place order</button>
-
+                                        
                                         <div class="elementor-field-group">
                                             <div class="payment-methods-container">
                                                 <img class="payment_methods" src="Images/gpay.jpg" alt="Gpay Payment Solutions">	
                                                 <img class="payment_methods" src="Images/phonepe.jpg" alt="PhonePe Payment Solutions">	
                                                 <img class="payment_methods" src="Images/paytm.jpg" alt="Paytm Payment Solutions">	
                                                 <img class="payment_methods" src="Images/amazon-pay.jpg" alt="Amazon-pay Payment Solutions">	
-
-                                            </div>                                          
+                                            </div>
                                         </div>     
                                   
                                     </div>
@@ -788,8 +802,29 @@
                         </li>
                         <li class="elementor-icon-list-item">
                             <a href="#">
-                                <span class="elementor-icon-list-text">5:00 pm to 7:00 pm</span>
+                                <span class="elementor-icon-list-text">6:00 pm to 9:00 pm</span>
                             </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-4db4af6f" data-id="4db4af6f" data-element_type="column">
+        <div class="elementor-widget-wrap elementor-element-populated">
+            <div class="elementor-element elementor-element-de2a0d3 elementor-widget elementor-widget-heading" data-id="de2a0d3" data-element_type="widget" data-widget_type="heading.default">
+                <div class="elementor-widget-container">
+                    <h2 class="elementor-heading-title elementor-size-default" >Policies</h2>		
+                </div>
+            </div>
+            <div class="elementor-element elementor-element-4bf4a9fc elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="4bf4a9fc" data-element_type="widget" data-widget_type="icon-list.default">
+                <div class="elementor-widget-container">
+                    <ul class="elementor-icon-list-items">
+                        <li class="elementor-icon-list-item">
+                                <a href="policies">
+                                   <span class="elementor-icon-list-text">Privacy Policy</span>
+                                </a>
                         </li>
                     </ul>
                 </div>
@@ -959,11 +994,12 @@
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
     <script type="text/javascript">
-        emailjs.init('f_r4sPAWKKbZy9eFF'); // Replace with your Public Key
+        emailjs.init('24FIpdEaUnCRobKau'); // Replace with your Public Key
     </script>
 
-    <script src="js/script.js?v=3.0" defer></script> <!--defer ensures the script runs after the document has been fully loaded.-->
-    <script src="js/cart.js?v=3.0" defer></script>   <!--defer ensures the script runs after the document has been fully loaded.-->
+ 
+    <script src="js/script.js" defer></script> <!--defer ensures the script runs after the document has been fully loaded.-->
+    <script src="js/cart.js" defer></script>   <!--defer ensures the script runs after the document has been fully loaded.-->
 
  
 
