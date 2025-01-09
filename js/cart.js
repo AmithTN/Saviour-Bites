@@ -79,7 +79,7 @@ function displayCartItems() {
                     <th style="width: 30%; text-align: left; padding: 8px;">Product</th> <!-- Adjust width as needed -->
                     <th style="width: 20%; text-align: center;">Price</th>
                     <th style="width: 15%; text-align: center;">Quantity</th>
-                    <th style="width: 20%; text-align: center;">Subtotal</th>
+                   
                     <th style="width: 15%; text-align: center;">Action</th>
                 </tr>
             </thead>
@@ -116,7 +116,7 @@ if (cartData.length === 0) {
                 </td>
                 <td style="text-align: center;"> ₹${item.price}&nbsp;</td>
                 <td style="text-align: center;">${item.quantity}&nbsp;</td>
-                <td style="text-align: center;">₹${subtotal}</td>
+              
                 <td style="text-align: center;">
                     <button class="remove-btn" onclick="removeFromCart(${index})">×</button>
                 </td>
@@ -124,12 +124,6 @@ if (cartData.length === 0) {
         `;
     });
 }
-
-
-    // Add hidden charges
-    const hiddenCharges = 10;
-    total += hiddenCharges;
-
 
 // Close the table structure
 cartItemHTML += `
@@ -312,129 +306,38 @@ function checkout() {
     if (!validateForm()) return;
 
     const cartData = JSON.parse(localStorage.getItem('cartData')) || [];
-    const totalAmount = localStorage.getItem('cartTotal') || 0;
 
     if (!cartData.length) {
         alert("Your cart is empty! Please add items before checking out.");
         return;
     }
 
-    const billingDetails = {
-        name: document.getElementById('form-field-fullname').value,
-        phone: document.getElementById('form-field-PhoneNo').value,
-        address: document.getElementById('form-field-address').value,
-        veggies: document.getElementById('form-field-veggies').value,
-        sprouts: document.getElementById('form-field-sprouts').value,
-        gym: document.getElementById('form-field-gym').value,
-        message: document.getElementById('form-field-message').value,
-    };
-    
-    // Disable the checkout button
-    const checkoutButton = document.getElementById('place_order');
-    if (checkoutButton) {
-        checkoutButton.disabled = true;
-        checkoutButton.textContent = "Processing...";
-    }
 
-    console.log("Cart Data:", cartData);
-    console.log("Billing Details:", billingDetails);
-    console.log("Total Amount:", totalAmount);
+const orderId = "ORDER" + Date.now(); // Generate a unique order ID
+const amount = localStorage.getItem("cartTotal") || 0; // Get the total amount
 
-        initiatePayment()
-    
-
+// Ensure the cart has items and total amount is valid
+if (parseInt(amount) === 0) {
+    alert("Your cart is empty. Please add items to proceed.");
+    return;
 }
 
-
-// Function to initiate payment via PhonePe
-function initiatePayment() {
-    const totalAmount = localStorage.getItem('cartTotal');
-    const userName = encodeURIComponent(document.getElementById('form-field-fullname').value);
-    
-    // Construct UPI payment link for PhonePe
-    const upiLink = `upi://pay?pa=PGTESTPAYUAT@upi&pn=${userName}&am=${totalAmount}&cu=INR`;
-    // Redirect the user to the UPI payment link
-    window.location.href = upiLink;
-
-    // Listen for payment completion (optional)
-    window.addEventListener('blur', function() {
-
-        // This can be a check for the transaction status via backend
-         alert("Please wait! Your order is being processed.");
-        
-        sendEmail(billingDetails, cartData, totalAmount); // Send confirmation email
-    });
-}
-
-//Function to send email
-
-function sendEmail(billingDetails, cartData, totalAmount) {
-    const templateParams = {
-        user_name: billingDetails.name,
-        user_phone: billingDetails.phone,
-        user_address: billingDetails.address,
-        user_veggies: billingDetails.veggies,
-        user_sprouts: billingDetails.sprouts,
-        user_gym: billingDetails.gym,
-        user_message: billingDetails.message,
-        cart_data: JSON.stringify(cartData, null, 2),
-        total_amount: totalAmount,
-    };
-
-    try {
-        emailjs
-            .send("service_nzbfq1h", "template_5089gbn", templateParams)
-            .then((response) => {
-                alert("Order placed successfully.\nThank you for your purchase!");
-                console.log("Email sent successfully:", response.status, response.text);
-
-                clearCart();
-                
-                // Re-enable the checkout button
-                const checkoutButton = document.getElementById('place_order');
-                if (checkoutButton) {
-                    checkoutButton.disabled = false;
-                    checkoutButton.textContent = "Place Order";
-                }
-                
-            })
-            .catch((error) => {
-                console.error("Failed to send email:", error);
-                alert("We encountered an issue while processing your order. Please try again.");
-                
-                // Re-enable the checkout button
-                const checkoutButton = document.getElementById('place_order');
-                if (checkoutButton) {
-                    checkoutButton.disabled = false;
-                    checkoutButton.textContent = "Place Order";
-                }
-            });
-    } 
-    catch (error) {
-        console.error("Unexpected error:", error);
-        alert("An unexpected error occurred. Please try again later.");
-        
-        // Re-enable the checkout button
-        const checkoutButton = document.getElementById('place_order');
-        if (checkoutButton) {
-            checkoutButton.disabled = false;
-            checkoutButton.textContent = "Place Order";
+// Send order details to initiateTransaction.php
+fetch("initiateTransaction.php", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: `orderId=${orderId}&amount=${amount}`,
+})
+    .then((response) => response.json())
+    .then((data) => {
+        if (data.success) {
+            // Redirect to PhonePe payment page
+            window.location.href = data.instrumentResponse.redirectUrl;
+        } else {
+            alert("Payment initiation failed. Try again.");
         }
-    }
-}
-
-// function to clear the local storage
-
-function clearCart() {
-    localStorage.removeItem("cartData");
-    localStorage.removeItem("cartTotal");
-    const cartContainer = document.getElementById("cart-container");
-    const cartTotal = document.getElementById("cart-total");
-
-    if (cartContainer) cartContainer.innerHTML = "";
-    if (cartTotal) cartTotal.textContent = "0";
-
-   
+    })
+    .catch((error) => console.error("Error:", error));
 }
 
 // Attach checkout function to Place Order button
