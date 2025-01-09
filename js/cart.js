@@ -335,7 +335,7 @@ function checkout() {
     console.log("Total Amount:", totalAmount);
     
     
-    
+    toggleCart();
     
     initiatePayment();
     
