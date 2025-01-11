@@ -239,8 +239,8 @@ function validateForm() {
     const nameField = document.getElementById('form-field-fullname');
     const phoneField = document.getElementById('form-field-PhoneNo');
     const addressField = document.getElementById('form-field-address'); 
-    const veggiesField = document.getElementById('form-field-veggies');
-    const sproutsField = document.getElementById('form-field-sprouts');
+/*    const veggiesField = document.getElementById('form-field-veggies');
+    const sproutsField = document.getElementById('form-field-sprouts');   */
     const gymField = document.getElementById('form-field-gym');
 
 
@@ -262,6 +262,7 @@ function validateForm() {
         addressField.setCustomValidity("");
     }
 
+/*
     if (!veggiesField.value) {
         veggiesField.setCustomValidity("Please select a veggies preference.");
         isValid = false;
@@ -275,6 +276,7 @@ function validateForm() {
     } else {
         sproutsField.setCustomValidity("");
     }
+*/
 
     if (!gymField.value) {
         gymField.setCustomValidity("Please select a gym preference.");
@@ -286,8 +288,8 @@ function validateForm() {
    
 
     return nameField.reportValidity() && phoneField.reportValidity() &&
-           addressField.reportValidity() && veggiesField.reportValidity() &&
-           sproutsField.reportValidity() && gymField.reportValidity();
+           addressField.reportValidity() && gymField.reportValidity();
+ //        &&  sproutsField.reportValidity() && veggiesField.reportValidity();
           
 }
 
@@ -317,8 +319,8 @@ function checkout() {
         name: document.getElementById('form-field-fullname').value,
         phone: document.getElementById('form-field-PhoneNo').value,
         address: document.getElementById('form-field-address').value,
-        veggies: document.getElementById('form-field-veggies').value,
-        sprouts: document.getElementById('form-field-sprouts').value,
+//        veggies: document.getElementById('form-field-veggies').value,
+//        sprouts: document.getElementById('form-field-sprouts').value,
         gym: document.getElementById('form-field-gym').value,
         message: document.getElementById('form-field-message').value,
     };
@@ -335,43 +337,10 @@ function checkout() {
     console.log("Total Amount:", totalAmount);
     
     
-
+    alert("Please wait! Your order is being processed.");
     
-    initiatePayment();
-    
-//     sendEmail(billingDetails, cartData, totalAmount);
- 
+    sendEmail(billingDetails, cartData, totalAmount);
 }
-
-
-// Function to initiate payment 
-function initiatePayment() {
-    const totalAmount = localStorage.getItem('cartTotal') || 0;
-
-    if (totalAmount <= 0) {
-        alert("Your cart is empty! Please add items before placing the order.");
-        return;
-    }
-    
-/*    const upiLink = `upi://pay?pa=amithalex5251@oksbi&pn=Saviour Bites&am=${totalAmount}&cu=INR`;
-    window.location.href = upiLink;    */
-
-        const upiId = "stk-7338534614-1@okbizaxis"; // Replace with your UPI ID
-        const payeeName = "SaviourBites"; // Replace with your business name
-        const transactionId = "TXN" + new Date().getTime(); // Unique transaction ID
-        const referenceId = "REF" + new Date().getTime(); // Unique reference ID
-        const transactionNote = "Payment for Saviour Bites Order"; // Replace with a relevant note
-        const currency = "INR";
-
-      
-        const upiLink = `upi://pay?pa=${upiId}&pn=${payeeName}&tid=${transactionId}&tr=${referenceId}&tn=${transactionNote}&cu=${currency}`;
-    
-        window.location.href = upiLink;  
-
-}
-
-
-
 
 //Function to send email
 
@@ -380,8 +349,8 @@ function sendEmail(billingDetails, cartData, totalAmount) {
         user_name: billingDetails.name,
         user_phone: billingDetails.phone,
         user_address: billingDetails.address,
-        user_veggies: billingDetails.veggies,
-        user_sprouts: billingDetails.sprouts,
+//        user_veggies: billingDetails.veggies,
+//        user_sprouts: billingDetails.sprouts,
         user_gym: billingDetails.gym,
         user_message: billingDetails.message,
         cart_data: JSON.stringify(cartData, null, 2),
