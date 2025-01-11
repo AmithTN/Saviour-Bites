@@ -239,8 +239,8 @@ function validateForm() {
     const nameField = document.getElementById('form-field-fullname');
     const phoneField = document.getElementById('form-field-PhoneNo');
     const addressField = document.getElementById('form-field-address'); 
-    const veggiesField = document.getElementById('form-field-veggies');
-    const sproutsField = document.getElementById('form-field-sprouts');
+//    const veggiesField = document.getElementById('form-field-veggies');
+//    const sproutsField = document.getElementById('form-field-sprouts');
     const gymField = document.getElementById('form-field-gym');
 
 
@@ -262,6 +262,7 @@ function validateForm() {
         addressField.setCustomValidity("");
     }
 
+/*
     if (!veggiesField.value) {
         veggiesField.setCustomValidity("Please select a veggies preference.");
         isValid = false;
@@ -275,7 +276,7 @@ function validateForm() {
     } else {
         sproutsField.setCustomValidity("");
     }
-
+*/
     if (!gymField.value) {
         gymField.setCustomValidity("Please select a gym preference.");
         isValid = false;
@@ -286,8 +287,8 @@ function validateForm() {
    
 
     return nameField.reportValidity() && phoneField.reportValidity() &&
-           addressField.reportValidity() && veggiesField.reportValidity() &&
-           sproutsField.reportValidity() && gymField.reportValidity();
+           addressField.reportValidity() && gymField.reportValidity();
+      //  &&   sproutsField.reportValidity() &&  veggiesField.reportValidity() ;
           
 }
 
