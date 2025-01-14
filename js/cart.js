@@ -412,6 +412,8 @@ function clearCart() {
     if (cartTotal) cartTotal.textContent = "0";
     
       //alert("Thank you for your purchase!\n\n Please complete your payment using the provided phone number via UPI apps.");
+
+    console.log("Triggering payment modal...");
     
      // Trigger the modal using vanilla JavaScript (Bootstrap 5)
     const paymentModal = new bootstrap.Modal(document.getElementById('paymentModal'));
