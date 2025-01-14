@@ -411,7 +411,10 @@ function clearCart() {
     if (cartContainer) cartContainer.innerHTML = "";
     if (cartTotal) cartTotal.textContent = "0";
     
-    alert("Thank you for your purchase!\n\n Please complete your payment using the provided phone number via UPI apps.");
+      //alert("Thank you for your purchase!\n\n Please complete your payment using the provided phone number via UPI apps.");
+    
+    // Trigger the modal for payment details
+    $('#paymentModal').modal('show');
 }
 
 // Attach checkout function to Place Order button
