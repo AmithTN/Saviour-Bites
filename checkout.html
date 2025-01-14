@@ -573,18 +573,23 @@
                                             <input type="text" name="form_fields[address]" id="form-field-address" class="elementor-field elementor-size-md elementor-field-textual" placeholder="Enter address here" required="required" aria-required="true">
                                         </div>
 
-<!--
+
                                         <div class="elementor-field-group elementor-field-required">
-                                            <label for="form-field-veggies" class="elementor-field-label">Veggies Preference<span style="color: red;">*</span></label>
-                                            <select name="form_fields[veggies]" id="form-field-veggies" class="elementor-field elementor-size-md" required="required" aria-required="true">
-                                                <option value="" disabled selected>Select an option</option>  
-                                                <option value="raw" >Raw</option>
-                                                <option value="steamed">Steamed</option>
-                                                <option value="boiled">Boiled</option>
+                                            <label for="form-field-veggies" class="elementor-field-label">Veggies Preference</label>
+                                            <select name="form_fields[veggies]" id="form-field-veggies" class="elementor-field elementor-size-md" >
+                                          <!--      <option value="" disabled selected>Select an option</option>  -->
+                                                <option value="raw" selected>Raw</option>
+                                                <option value="steamed">Steamed</option>                                           
                                                 <option value="none">None</option>
                                             </select>
                                         </div>
-                                        
+
+                                      <div class="elementor-field-group">
+                                            <label for="form-field-message" class="elementor-field-label">Customization Message
+                                                <textarea name="form_fields[message]" id="form-field-message" class="elementor-field-textual elementor-field elementor-size-md" rows="4" placeholder="Type your message here"></textarea>	
+                                            </label>
+                                        </div>
+<!--                                        
                                         <div class="elementor-field-group elementor-field-required">
                                             <label for="form-field-sprouts" class="elementor-field-label">Sprouts Preference<span style="color: red;">*</span></label>
                                             <select name="form_fields[sprouts]" id="form-field-sprouts" class="elementor-field elementor-size-md" required="required" aria-required="true">
