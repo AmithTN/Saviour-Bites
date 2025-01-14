@@ -230,8 +230,30 @@ function toggleCart() {
 
 document.addEventListener('DOMContentLoaded', () => {
     // Retrieve and display the cart total on the checkout page
-    const cartTotal = localStorage.getItem('cartTotal') || 0;
-    document.getElementById('cart-total').textContent = cartTotal;
+    const cartTotalElement = document.getElementById('cart-total');
+    let cartTotal = parseInt(localStorage.getItem('cartTotal')) || 0;
+
+    // Update the displayed cart total
+    cartTotalElement.textContent = cartTotal;
+
+    // Add event listener for the veggies dropdown
+    const veggiesField = document.getElementById('form-field-veggies');
+
+    veggiesField.addEventListener('change', () => {
+        // Reset the cart total to the base value stored in localStorage
+        cartTotal = parseInt(localStorage.getItem('cartTotal')) || 0;
+
+        // Check if "steamed" is selected
+        if (veggiesField.value === "steamed") {
+            cartTotal += 20; // Add ₹20 for steamed veggies
+        }
+
+        // Update the displayed total
+        cartTotalElement.textContent = cartTotal;
+
+        // Update localStorage with the new total
+        localStorage.setItem('cartTotal', cartTotal);
+    });
 });
 
 // Check if each field is valid using reportValidity()
