@@ -660,7 +660,42 @@
                 </div>
             </div>
         </section>
-    </div>                
+    </div>   
+
+        <!-- New Modal for Payment Details -->
+<div class="modal fade mx-auto" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="paymentModalLabel">Thank You for Your Purchase!</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Thank you for your purchase!</strong><br>Please complete your payment using the provided phone number via UPI apps.</p>
+
+                <!-- Payment Phone Number -->
+                <div class="elementor-field-group elementor-field-required">
+                    <label for="form-field-payment-phone" class="elementor-field-label" style="color: #409843; font-weight: bold;">Payment Contact Number</label>
+                    <input type="text" name="form_fields[payment_phone]" id="form-field-payment-phone" style="font-weight: bold;" class="elementor-field elementor-size-md elementor-field-textual" value="73385434614" readonly="readonly" aria-required="true">
+                </div>
+
+                <!-- Recipient Name -->
+                <div class="elementor-field-group elementor-field-required">
+                    <label for="form-field-recipient-name" class="elementor-field-label" style="color: #409843; font-weight: bold;">Recipient Name</label>
+                    <input type="text" name="form_fields[recipient_name]" id="form-field-recipient-name" style="font-weight: bold;" class="elementor-field elementor-size-md elementor-field-textual" value="Amith" readonly="readonly" aria-required="true">
+                </div>
+
+                <!-- Payment Information -->
+                <p>All UPI payments are accepted.</p>
+            </div>
+            
+            <div class="modal-footer Submitdiv">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+            
+        </div>
+    </div>
+</div>
     
     <style>                                           
         .payment-methods-container {
