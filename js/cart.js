@@ -361,7 +361,25 @@ function checkout() {
     
     alert("Please wait! Your order is being processed.");
     
-    sendEmail(billingDetails, cartData, totalAmount);
+    initiatePayment();
+}
+
+// Function to initiate payment 
+function initiatePayment() {
+    const totalAmount = localStorage.getItem('cartTotal') || 0;
+
+    if (totalAmount <= 0) {
+        alert("Your cart is empty! Please add items before placing the order.");
+        return;
+    }
+
+        const paymentUrl = "https://mercury-t2.phonepe.com/transact/pg?token=MmVkMzBmZTg3YjY2NTZiNDc4MjA1ZGViM2FjODFjOGViYzZjYzViZTFhN2RkNjFhNjU5YmFhMjU5YjZmNDQ3YWRkMTY2YjdlYjFjMjEzY2I3NmZkZjkxZjVkYzg1OGNhOjYxYTFiNzIxYjQzZTM4YTM0NGRmMDY0MDdhOTE3NmFk";
+
+        window.location.href = paymentUrl; // Redirects the user to the payment page
+
+
+        sendEmail(billingDetails, cartData, totalAmount);
+
 }
 
 //Function to send email
