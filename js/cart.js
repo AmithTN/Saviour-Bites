@@ -445,6 +445,11 @@ function sendEmail(billingDetails, cartData, totalAmount) {
 function clearCart() {
     localStorage.removeItem("cartData");
     localStorage.removeItem("cartTotal");
+    
+    localStorage.removeItem("cartItemsContainer");
+    localStorage.removeItem("cartItemsContainerMobile");
+    
+    localStorage.removeItem("cartQuantityDisplays")
     const cartContainer = document.getElementById("cart-container");
     const cartTotal = document.getElementById("cart-total");
 
