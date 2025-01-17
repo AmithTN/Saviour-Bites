@@ -227,14 +227,17 @@ function toggleCart() {
 
 //Checkout
 
-
 document.addEventListener('DOMContentLoaded', () => {
     // Retrieve and display the cart total on the checkout page
     const cartTotalElement = document.getElementById('cart-total');
+    const deliveryChargeElement = document.getElementById('delivery-charge');
     let cartTotal = parseInt(localStorage.getItem('cartTotal')) || 0;
 
     // Update the displayed cart total
     cartTotalElement.textContent = cartTotal;
+
+     // Update the displayed cart total
+     updateTotal(cartTotal);
 
     // Add event listener for the veggies dropdown
     const veggiesField = document.getElementById('form-field-veggies');
@@ -248,12 +251,29 @@ document.addEventListener('DOMContentLoaded', () => {
             cartTotal += 20; // Add ₹20 for steamed veggies
         }
 
-        // Update the displayed total
+
+        // Update the total and localStorage
+        updateTotal(cartTotal);
+    });
+
+    function updateTotal(cartTotal) {
+        // Check if cart total is greater than 0
+        if (cartTotal > 0) {
+            // Add delivery charges
+            const deliveryCharge = 20;
+            cartTotal += deliveryCharge;
+            deliveryChargeElement.textContent = deliveryCharge;
+        } else {
+            // Set delivery charge to 0 if the cart is empty
+            deliveryChargeElement.textContent = "0";
+        }
+
+        // Update the displayed cart total
         cartTotalElement.textContent = cartTotal;
 
         // Update localStorage with the new total
         localStorage.setItem('cartTotal', cartTotal);
-    });
+    }
 });
 
 // Check if each field is valid using reportValidity()
