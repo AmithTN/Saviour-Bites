@@ -226,9 +226,8 @@ function toggleCart() {
 
 
 //Checkout
-
 document.addEventListener('DOMContentLoaded', () => {
-    // Retrieve and display the cart total on the checkout page
+    // Retrieve and display the cart total and delivery charge on the checkout page
     const cartTotalElement = document.getElementById('cart-total');
     const deliveryChargeElement = document.getElementById('delivery-charge');
 
@@ -251,27 +250,28 @@ document.addEventListener('DOMContentLoaded', () => {
         updateTotal(baseCartTotal);
     });
 
-    // Update the displayed cart total
+    // Update the displayed cart total on page load
     updateTotal(baseCartTotal);
 
     function updateTotal(baseCartTotal) {
-        let total = baseCartTotal;
+        let deliveryCharge = 0;
+        let finalTotal = baseCartTotal;
 
-        // Check if baseCartTotal is greater than 0
+        // Apply delivery charge if cart total is greater than 0
         if (baseCartTotal > 0) {
-            const deliveryCharge = 20;
-            total += deliveryCharge;
-            deliveryChargeElement.textContent = deliveryCharge;
-        } else {
-            deliveryChargeElement.textContent = "0";
+            deliveryCharge = 20;
+            finalTotal += deliveryCharge;
         }
 
+        // Update the delivery charge section
+        deliveryChargeElement.textContent = deliveryCharge;
+
         // Update the displayed total
-        cartTotalElement.textContent = total;
+        cartTotalElement.textContent = finalTotal;
 
         // Save baseCartTotal and the updated total separately in localStorage
         localStorage.setItem('baseCartTotal', baseCartTotal);
-        localStorage.setItem('cartTotal', total);
+        localStorage.setItem('cartTotal', finalTotal);
     }
 });
 
