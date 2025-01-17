@@ -231,50 +231,50 @@ document.addEventListener('DOMContentLoaded', () => {
     // Retrieve and display the cart total on the checkout page
     const cartTotalElement = document.getElementById('cart-total');
     const deliveryChargeElement = document.getElementById('delivery-charge');
-    let cartTotal = parseInt(localStorage.getItem('cartTotal')) || 0;
 
-    // Update the displayed cart total
-    cartTotalElement.textContent = cartTotal;
-
-     // Update the displayed cart total
-     updateTotal(cartTotal);
+    // Retrieve the base cart total (excluding delivery charge) from localStorage
+    let baseCartTotal = parseInt(localStorage.getItem('baseCartTotal')) || 0;
 
     // Add event listener for the veggies dropdown
     const veggiesField = document.getElementById('form-field-veggies');
 
     veggiesField.addEventListener('change', () => {
-        // Reset the cart total to the base value stored in localStorage
-        cartTotal = parseInt(localStorage.getItem('cartTotal')) || 0;
+        // Reset the base cart total
+        baseCartTotal = parseInt(localStorage.getItem('baseCartTotal')) || 0;
 
         // Check if "steamed" is selected
         if (veggiesField.value === "steamed") {
-            cartTotal += 20; // Add ₹20 for steamed veggies
+            baseCartTotal += 20; // Add ₹20 for steamed veggies
         }
 
-
         // Update the total and localStorage
-        updateTotal(cartTotal);
+        updateTotal(baseCartTotal);
     });
 
-    function updateTotal(cartTotal) {
-        // Check if cart total is greater than 0
-        if (cartTotal > 0) {
-            // Add delivery charges
+    // Update the displayed cart total
+    updateTotal(baseCartTotal);
+
+    function updateTotal(baseCartTotal) {
+        let total = baseCartTotal;
+
+        // Check if baseCartTotal is greater than 0
+        if (baseCartTotal > 0) {
             const deliveryCharge = 20;
-            cartTotal += deliveryCharge;
+            total += deliveryCharge;
             deliveryChargeElement.textContent = deliveryCharge;
         } else {
-            // Set delivery charge to 0 if the cart is empty
             deliveryChargeElement.textContent = "0";
         }
 
-        // Update the displayed cart total
-        cartTotalElement.textContent = cartTotal;
+        // Update the displayed total
+        cartTotalElement.textContent = total;
 
-        // Update localStorage with the new total
-        localStorage.setItem('cartTotal', cartTotal);
+        // Save baseCartTotal and the updated total separately in localStorage
+        localStorage.setItem('baseCartTotal', baseCartTotal);
+        localStorage.setItem('cartTotal', total);
     }
 });
+
 
 // Check if each field is valid using reportValidity()
 function validateForm() {
